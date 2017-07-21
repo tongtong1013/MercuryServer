@@ -18,6 +18,7 @@ mysql_select_db("mercury", $con);
 echo "2";
 $result = mysql_query("SELECT * FROM tbl_idpassword");
 echo "3";
+echo $result;
 while($row = mysql_fetch_array($result))
   {
 	  echo "!!";
