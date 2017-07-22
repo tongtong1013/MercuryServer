@@ -22,7 +22,7 @@ echo $result;
 while($row = mysql_fetch_array($result))
   {
 	  echo "!!";
-  echo $row['ID ='] . " " . $row['Password = '];
+  echo $row['ID'] . " " . $row['Password'];
   echo "<br />";
   }
 echo "4";
