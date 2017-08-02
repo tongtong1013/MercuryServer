@@ -1,31 +1,36 @@
 <?php
-header('Content-Type: application/json');
+$filename = dirname(__FILE__) . '/ConfigFile/ServerInfo.txt';
+if(!is_file($filename))
+{
+    echo 'file do not exit!';
+    exit;
+}
+$dbData = json_decode(file_get_contents($filename),true);
+//var_dump($dbData);
 
-$a = $_REQUEST['a'];
-$b = $_REQUEST['b'];
+/*
+$dbData = array(
+    'host' => '',
+    'user' => '',
+    'password' => ''
+);
+*/
 
-$data = array('a' => $a, 'b' => $b);
-echo json_encode($data);
+//echo $dbData['host'];
+//echo $dbData['user'];
+//echo $dbData['password'];
 
-$con = mysql_connect("localhost","root","85133288");
-if (!$con)
-  {
-  die('Could not connect: ' . mysql_error());
-  }
-
-echo "1";
-mysql_select_db("mercury", $con);
-echo "2";
+$db = mysql_connect($dbData['host'],$dbData['user'],$dbData['password']);
+if(!$db)
+{
+    die("Could not connect!" . mysql_error());
+}
+mysql_select_db("mercury",$db);
 $result = mysql_query("SELECT * FROM tbl_idpassword");
-echo "3";
-echo $result;
 while($row = mysql_fetch_array($result))
-  {
-	  echo "!!";
-  echo $row['ID'] . " " . $row['Password'];
-  echo "<br />";
-  }
-echo "4";
+{
+    echo $row['ID'] . " " . $row['Password'];
+    echo "<br />";
+}
 mysql_close($con);
-echo "5";
 ?>
