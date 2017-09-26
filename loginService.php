@@ -1,10 +1,8 @@
 <?php
 header('Content-Type:application/json;charset=utf8');
-$id = $_POST['id'];
-$password = $_POST['password'];
-//echo $id;
-//echo $password;
-
+$value = json_decode(file_get_contents('php://input'), true);//false是object格式，true是array格式
+$id = $value['id'];
+$password = $value['password'];
 $filetemp = dirname(__FILE__) . '/ConfigFile/TempInfo.txt';
 
 //file_put_contents($filetemp, json_encode($id + " and " + $password));
@@ -66,6 +64,6 @@ while($row = mysql_fetch_array($result))
     echo "<br />";
 }
 */
-mysqli_close($db);
+//mysqli_close($db);
 
 ?>

@@ -1,7 +1,8 @@
 <?php
 header('Content-Type:application/json;charset=utf8');
-$id = $_POST['id'];
-$password = $_POST['password'];
+$value = json_decode(file_get_contents('php://input'), true);//false是object格式，true是array格式
+$id = $value['id'];
+$password = $value['password'];
 $filename = dirname(__FILE__) . '/ConfigFile/ServerInfo.txt';
 if(!is_file($filename))
 {
