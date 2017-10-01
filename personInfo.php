@@ -33,6 +33,7 @@ if(!is_file($filename))
 }
 $dbData = json_decode(file_get_contents($filename),true);
 $db = mysqli_connect($dbData['host'],$dbData['user'],$dbData['password']);
+mysqli_query($db,"SET NAMES utf8");
 if(!$db)
 {
     die("Could not connect!" . mysqli_error());
@@ -58,6 +59,6 @@ $answer = array(
     'Detail' => $row[13],
     'Photo' => $row[14]
 );
-$jsonStr = json_encode($answer);
+$jsonStr = json_encode($answer,JSON_UNESCAPED_UNICODE);
 echo $jsonStr;
 ?>
